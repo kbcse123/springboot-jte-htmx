@@ -58,4 +58,18 @@ public class CartController  extends BaseController{
         return "cart-content";
     }
 
+    @DeleteMapping("/cart/row/{itemId}")
+    public String deleteRowFromCart(Model model, @PathVariable int itemId, HttpServletRequest request) {
+        int cartCount = getCartCount(request);
+        if (cartCount > 0) {
+            cartCount -= 1;
+            request.getSession().setAttribute("cartCount", cartCount);
+            itemService.deleteRowFromCart(itemId, request);
+        }
+        model.addAttribute("cartCount", cartCount);
+        loadItems(model);
+        cart(model, request);
+        return "cart-content";
+    }
+
 }

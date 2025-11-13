@@ -16,4 +16,5 @@ public interface ItemService {
     CartTotal getCartTotal();
 
 
+    void deleteRowFromCart(int itemId, HttpServletRequest request);
 }

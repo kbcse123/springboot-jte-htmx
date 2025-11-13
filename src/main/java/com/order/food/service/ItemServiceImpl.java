@@ -54,6 +54,16 @@ public class ItemServiceImpl implements ItemService {
         log.info("item id " + itemId + " deleted from cart ");
     }
 
+    @Override
+    public void deleteRowFromCart(int itemId, HttpServletRequest request) {
+        Item item = findItem(getItems(), itemId);
+        cartTotal.setSubTotal(cartTotal.getSubTotal() - item.getTotal());
+        item.setQuantity(0);
+        item.setTotal(0);
+        cartTotal.setTotal(cartTotal.getSubTotal() + cartTotal.getDeliveryFee());
+        log.info("Row deleted from cart ");
+    }
+
     private void updateItem(Item item, boolean increment) {
         if (increment) {
             item.setQuantity(item.getQuantity() + 1);
@@ -76,4 +86,6 @@ public class ItemServiceImpl implements ItemService {
     public CartTotal getCartTotal(){
         return cartTotal;
     }
+
+
 }

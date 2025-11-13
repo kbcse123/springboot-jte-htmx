@@ -61,7 +61,9 @@
                                         <p class="mb-0 mt-4">Rs.${item.getTotal()}</p>
                                     </td>
                                     <td>
-                                        <button class="btn btn-md rounded-circle bg-light border mt-4">
+                                        <button hx-delete="/cart/row/${item.getId()}" hx-target="#cart-content, #cartCount"
+                                                hx-swap="outerHTML" hx-indicator="#spinner"
+                                                class="btn btn-md rounded-circle bg-light border mt-4">
                                             <i class="fa fa-times text-danger"></i>
                                         </button>
                                     </td>
